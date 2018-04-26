@@ -1,0 +1,41 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+import logging
+logging.basicConfig(level=logging.INFO)
+ 
+class Flask_Pocket_Guide(BasicNewsRecipe):
+ 
+    title = 'Flask Pocket Guide'
+    description = ''
+    cover_url = 'http://flask.pocoo.org/docs/0.12/_images/logo-full.png'
+ 
+    url_prefix = 'http://flask.pocoo.org/docs/0.12/'
+    no_stylesheets = True
+    keep_only_tags = [{ 'class': 'section' }]
+ 
+    def get_title(self, link):
+        return link.contents[0].strip()
+ 
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_prefix)
+ 
+        div = soup.find('div', { 'class': 'toctree-wrapper compound' })
+ 
+        articles = []
+        for link in div.findAll('a'):
+            if '#' in link['href']:
+                continue
+ 
+            #if not 'ch' in link['href']:
+            #    continue
+ 
+            til = self.get_title(link)
+            url = self.url_prefix + link['href']
+            a = { 'title': til, 'url': url }
+
+            logging.info('title:' + til + ' url:' + url)
+ 
+            articles.append(a)
+ 
+        ans = [('Flask_Pocket_Guide', articles)]
+ 
+        return ans
