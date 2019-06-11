@@ -5,6 +5,7 @@ recipe for calibre
 和转换普通的电子书的格式一样，只需要输入以下命令即可开始进行转化。
 
 `ebook-convert test.recipe test.mobi --output-profile kindle`
+
 注意上面的代码中增加了一个参数 --output-profile kindle，这个参数的意思是根据 Kindle 设备做适配，如果不添加这个参数，转换出来的电子书会有一个对 Kindle 来说多余的翻页导航。
 
 另外在转换的过程中也会有意外情况，比如由于资源链接被墙，或由于网络不稳定导致页面抓取失败。本例中抓取的博客由于引用了两张 Google 服务器上的图片，不使用代理就会抓取失败。
