@@ -1,0 +1,42 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+import logging
+logging.basicConfig(level=logging.INFO)
+ 
+class TCPIP_Illustrated(BasicNewsRecipe):
+ 
+    language = 'zh'
+    title = 'TCP/IP详解'
+    description = ''
+    cover_url = 'http://www.52im.net/template/qu_115style/img/tcpip_vol1/tcpip_cover_opti.jpg'
+ 
+    url_prefix = 'http://www.52im.net/topic-tcpipvol1.html?mobile=no'
+    #no_stylesheets = True
+    keep_only_tags = [{ 'class': 'Sect'}]
+ 
+    def get_title(self, link):
+        return link.contents[0].strip()
+ 
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_prefix)
+ 
+        div = soup.find('ul', { 'id': 'ID_bbs_subjects_p1' })
+ 
+        articles = []
+        for link in div.findAll('a',{'class': 'fname'}):
+            if '#' in link['href']:
+                continue
+ 
+            #if not 'ch' in link['href']:
+            #    continue
+ 
+            til = self.get_title(link)
+            url = link['href']
+            a = { 'title': til, 'url': url }
+
+            logging.info('title:' + til + ' url:' + url)
+ 
+            articles.append(a)
+ 
+        ans = [('Flask_Pocket_Guide', articles)]
+ 
+        return ans
