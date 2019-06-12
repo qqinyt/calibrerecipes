@@ -15,3 +15,5 @@ recipe for calibre
 提示1：如果你不想使用命令行工具，当然也可以使用 Calibre 界面上的“抓取新闻”功能来完成同样的工作。你只需要把编写好的 Recipe 代码粘贴到新建的 Recipe 脚本中，或者直接导入已有的 Recipe 脚本文件，然后和抓取 RSS 的操作一样，在“定期新闻下载”面板上选中“自定义脚本”，点击【立即下载】按钮即可完成转换。不过这种方法会始终带有翻页导航。
 
 提示2：当然还有一个比较方便的转换方法，就是直接把 Recipe 脚本拖进 Calibre，然后像转换普通电子书那样进行转换，Calibre 会自动执行抓取工作，最终将抓取的数据转成目标格式。
+
+[calibre API](https://manual.calibre-ebook.com/news_recipe.html)
